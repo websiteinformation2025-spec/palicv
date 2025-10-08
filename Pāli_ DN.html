@@ -1,0 +1,338 @@
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Pāli: DN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./css/index-core.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/index-override.css" />
+    <link rel="stylesheet" href="./css/font-styles.css" />
+
+    <link
+      rel="manifest"
+      href="https://www.digitalpalireader.online/manifest.webmanifest"
+    />
+    <meta name="theme-color" content="#FFFFDD" />
+    <meta
+      name="Description"
+      content="A tool for immersive study of Pāli canon and the language."
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://www.digitalpalireader.online/_dprhtml/images/logo192.png"
+    />
+    <link rel="icon" href="https://www.digitalpalireader.online/favicon.png" />
+
+    <style>
+      @font-face {
+        font-family: "LaoPaliAlpha";
+        src: url("./fonts/lao/LaoPaliAlpha.woff2") format("woff2"),
+          url("./fonts/lao/LaPaliAlpha.woff") format("woff"),
+          url("https://cdn.jsdelivr.net/gh/Maiphan19/my-fonts@latest/fonts/LaoPaliAlpha.woff2")
+            format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body,
+      .localized,
+      .d-flex,
+      textarea,
+      select,
+      option,
+      button {
+        font-family: "LaoPaliAlpha", "Noto Sans Lao", sans-serif !important;
+      }
+
+      /* เพิ่มความชัดให้ฟอนต์ลาว */
+      textarea {
+        font-size: 18px;
+        line-height: 1.6;
+        direction: ltr;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="main-bottom-pane-tab-panes" style="height: 100%">
+      <div
+        id="main-bottom-pane-tab-panes-Cv"
+        data-bind="visible: isCvTabSelected"
+        style=""
+      >
+        <div class="cv-container force-show-scrollbar-on-macos">
+          <div id="cinput-container" class="d-flex localized" script="ro">
+            <textarea
+              id="cinput"
+              onkeydown="if(event.keyCode==13) DPR_BottomPane.cvConvert(true); event.keyCode=0;"
+            ></textarea>
+          </div>
+          <div id="cinform-div">
+            <label class="small-bold-font" for="cinform">From</label>
+            <select
+              class="custom-select force-show-scrollbar-on-macos"
+              size="3"
+              id="cinform"
+              onclick="DPR_convert_mod.changeConversion(1)"
+            >
+              <option name="Unicode">Unicode</option>
+              <option name="Velthuis" selected="">Velthuis</option>
+              <option name="Thai">ไทย</option>
+              <option name="Sinhala">සිංහල</option>
+              <option name="Devanagari">देवनागरी</option>
+              <option name="Laos">ລາວ</option>
+              <option name="Myanmar">ဗမာစာ</option>
+              <option name="Khmer">ភាសាខ្មែរ</option>
+              <option name="Bengali">বাংলা</option>
+              <option name="Gurmukhi">ਗੁਰਮੁਖੀ</option>
+              <option name="Gujarati">ગુજરાતી</option>
+              <option name="Telugu">తెలుగు</option>
+              <option name="Kannada">ಕನ್ನಡ</option>
+              <option name="Malayalam">മലയാളം</option>
+              <option name="Tai Tham">Tai Tham LN</option>
+              <option name="Brahmi">Brāhmī</option>
+              <option name="Tibetan">བོད་སྐད།</option>
+              <option name="Cyrillic">кириллица</option>
+            </select>
+          </div>
+          <div id="cactions">
+            <button
+              id="buttonCvConv"
+              class="btn btn-sm btn-light my-1"
+              onclick="DPR_BottomPane.cvConvert(false,document.getElementById('lower').checked)"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Convert from one format to another"
+            >
+              Convert
+            </button>
+            <button
+              class="btn btn-sm btn-light my-1"
+              onclick="document.getElementById('coutput').value=DPR_BottomPane.cvSortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Sort input by Pāli word order"
+            >
+              Sort
+            </button>
+            <button
+              class="btn btn-sm btn-light my-1"
+              onclick="DPR_convert_mod.clearboth()"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="clear both boxes"
+            >
+              Clear
+            </button>
+            <div id="cactions-lowercase">
+              <input
+                class="btn btn-sm btn-light m-0"
+                type="checkbox"
+                id="lower"
+                name="lower"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="convert to lowercase"
+              />
+              <label for="lower" class="pl-1 mt-2">lowercase</label>
+            </div>
+          </div>
+          <div id="coutform-div">
+            <label class="small-bold-font" for="coutform">To</label>
+            <select
+              class="custom-select force-show-scrollbar-on-macos"
+              size="3"
+              id="coutform"
+              onclick="DPR_convert_mod.changeConversion(2)"
+            >
+              <option name="Unicode">Unicode</option>
+              <option name="Velthuis" selected="">Velthuis</option>
+              <option name="Thai">ไทย</option>
+              <option name="Sinhala">සිංහල</option>
+              <option name="Devanagari">देवनागरी</option>
+              <option name="Laos">ລາວ</option>
+              <option name="Myanmar">ဗမာစာ</option>
+              <option name="Khmer">ភាសាខ្មែរ</option>
+              <option name="Bengali">বাংলা</option>
+              <option name="Gurmukhi">ਗੁਰਮੁਖੀ</option>
+              <option name="Gujarati">ગુજરાતી</option>
+              <option name="Telugu">తెలుగు</option>
+              <option name="Kannada">ಕನ್ನಡ</option>
+              <option name="Malayalam">മലയാളം</option>
+              <option name="Tai Tham">Tai Tham LN</option>
+              <option name="Brahmi">Brāhmī</option>
+              <option name="Tibetan">བོད་སྐད།</option>
+              <option name="Cyrillic">кириллица</option>
+            </select>
+          </div>
+          <div id="coutput-container" class="d-flex localized" script="lo">
+            <textarea id="coutput"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const getDeploymentVar = (depVar, defVal) =>
+        depVar.startsWith("#{") ? defVal : depVar;
+
+      var deploymentEnvironmentName = "production";
+      var deploymentReleaseNumber = "5.22.0109.01";
+      var deploymentCreatedTimestamp = "2022-03-27 13:25:58Z";
+      var deploymentAppInsightsInstrumentationKey =
+        "4a78a211-3b42-45d2-a568-bd6e9113575e";
+
+      var environmentName = getDeploymentVar(
+        deploymentEnvironmentName,
+        "localdev"
+      );
+      var releaseNumber = getDeploymentVar(
+        deploymentReleaseNumber,
+        "0.00.0000.00"
+      );
+      var createdTimestamp = getDeploymentVar(
+        deploymentCreatedTimestamp,
+        new Date().toISOString().slice(0, 19).replace("T", " ") + "Z"
+      );
+      const nullInstrumentationkey = "00000000-0000-0000-0000-000000000000";
+      var appInsightsInstrumentationKey = getDeploymentVar(
+        deploymentAppInsightsInstrumentationKey,
+        nullInstrumentationkey
+      );
+
+      var sdkInstance = "appInsightsSDK";
+      window[sdkInstance] = "appInsights";
+      var aiName = window[sdkInstance],
+        aisdk =
+          window[aiName] ||
+          (function (e) {
+            function n(e) {
+              t[e] = function () {
+                var n = arguments;
+                t.queue.push(function () {
+                  t[e].apply(t, n);
+                });
+              };
+            }
+            var t = { config: e };
+            t.initialize = !0;
+            var i = document,
+              a = window;
+            setTimeout(function () {
+              var n = i.createElement("script");
+              (n.src =
+                e.url ||
+                "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js"),
+                i.getElementsByTagName("script")[0].parentNode.appendChild(n);
+            });
+            try {
+              t.cookie = i.cookie;
+            } catch (e) {}
+            (t.queue = []), (t.version = 2);
+            for (
+              var r = [
+                "Event",
+                "PageView",
+                "Exception",
+                "Trace",
+                "DependencyData",
+                "Metric",
+                "PageViewPerformance",
+              ];
+              r.length;
+
+            )
+              n("track" + r.pop());
+            n("startTrackPage"), n("stopTrackPage");
+            var s = "Track" + r[0];
+            if (
+              (n("start" + s),
+              n("stop" + s),
+              n("addTelemetryInitializer"),
+              n("setAuthenticatedUserContext"),
+              n("clearAuthenticatedUserContext"),
+              n("flush"),
+              (t.SeverityLevel = {
+                Verbose: 0,
+                Information: 1,
+                Warning: 2,
+                Error: 3,
+                Critical: 4,
+              }),
+              !(
+                !0 === e.disableExceptionTracking ||
+                (e.extensionConfig &&
+                  e.extensionConfig.ApplicationInsightsAnalytics &&
+                  !0 ===
+                    e.extensionConfig.ApplicationInsightsAnalytics
+                      .disableExceptionTracking)
+              ))
+            ) {
+              n("_" + (r = "onerror"));
+              var o = a[r];
+              (a[r] = function (e, n, i, a, s) {
+                var c = o && o(e, n, i, a, s);
+                return (
+                  !0 !== c &&
+                    t["_" + r]({
+                      message: e,
+                      url: n,
+                      lineNumber: i,
+                      columnNumber: a,
+                      error: s,
+                    }),
+                  c
+                );
+              }),
+                (e.autoExceptionInstrumented = !0);
+            }
+            return t;
+          })({
+            instrumentationKey: appInsightsInstrumentationKey,
+          });
+      (window[aiName] = aisdk),
+        aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
+
+      appInsights.addTelemetryInitializer((e) => {
+        if (appInsightsInstrumentationKey === nullInstrumentationkey) {
+          return false;
+        }
+
+        e.data["dpr.environment.name"] = environmentName;
+        e.data["dpr.release.number"] = releaseNumber;
+        e.data["dpr.created.timestamp"] = createdTimestamp;
+        return true;
+      });
+    </script>
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/globalObject.js"></script>
+    <script src="./js/io.js"></script>
+    <script src="./js/send.js"></script>
+    <script src="./js/receive.js"></script>
+    <script src="./js/chrome_sidebar.js"></script>
+    <script src="./js/send_sidebar.js"></script>
+    <script src="./js/send_bottom.js"></script>
+    <script src="./js/dhpv.js"></script>
+    <script src="./js/navigation_common.js"></script>
+    <script src="./js/navigation_sidebar.js"></script>
+    <script src="./js/prefload.js"></script>
+    <script src="./js/xml_sidebar.js"></script>
+    <script src="./js/translitCore.js"></script>
+    <script src="./js/translit.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/xml_load.js"></script>
+    <script src="./js/navigation.js"></script>
+    <script src="./js/format.js"></script>
+    <script src="./js/opts_sidebar.js"></script>
+    <script src="./js/dt_list.js"></script>
+    <script src="./js/translations.js"></script>
+    <script src="./js/xml.js"></script>
+    <script src="./js/history.js"></script>
+    <script src="./js/convert.js"></script>
+  </body>
+</html>
